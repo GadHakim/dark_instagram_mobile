@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:instagram/ui/pages/sign_in_page.dart';
 import 'package:instagram/ui/pages/sign_up_page.dart';
-import 'package:instagram/ui/widgets/gradients.dart';
+import 'package:instagram/utils/gradients.dart';
 
 class WelcomePage extends StatelessWidget {
   @override

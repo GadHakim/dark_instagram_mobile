@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:instagram/ui/widgets/gradients.dart';
+import 'package:instagram/utils/gradients.dart';
 
 class SignInPage extends StatefulWidget {
   @override

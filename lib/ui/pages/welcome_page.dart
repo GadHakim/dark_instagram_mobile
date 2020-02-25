@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:instagram/ui/pages/sign_in_page.dart';
+import 'package:instagram/ui/pages/sign_up_page.dart';
 import 'package:instagram/ui/widgets/gradients.dart';
 
 class WelcomePage extends StatelessWidget {
@@ -41,7 +43,7 @@ class WelcomePage extends StatelessWidget {
                             style: TextStyle(fontSize: 18.0),
                           ),
                         ),
-                        onPressed: () {},
+                        onPressed: () => _navigateToSignInPage(context),
                         shape: new RoundedRectangleBorder(
                           borderRadius: new BorderRadius.circular(30.0),
                         ),
@@ -58,7 +60,7 @@ class WelcomePage extends StatelessWidget {
                             style: TextStyle(fontSize: 18.0),
                           ),
                         ),
-                        onPressed: () {},
+                        onPressed: () => _navigateToSignUpPage(context),
                         shape: new RoundedRectangleBorder(
                           borderRadius: new BorderRadius.circular(30.0),
                         ),
@@ -75,5 +77,17 @@ class WelcomePage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void _navigateToSignInPage(BuildContext context) {
+    Navigator.push(context, MaterialPageRoute(builder: (context) {
+      return SignInPage();
+    }));
+  }
+
+  void _navigateToSignUpPage(BuildContext context) {
+    Navigator.push(context, MaterialPageRoute(builder: (context) {
+      return SignUpPage();
+    }));
   }
 }

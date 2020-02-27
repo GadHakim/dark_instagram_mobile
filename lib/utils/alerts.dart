@@ -23,3 +23,30 @@ Future<void> showDialogMessage(
     },
   );
 }
+
+Future<void> showLoadingDialog(BuildContext context) {
+  return showDialog<void>(
+    context: context,
+    barrierDismissible: false,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        content: Container(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              CircularProgressIndicator(),
+              SizedBox(
+                height: 10.0,
+              ),
+              Text("Loading"),
+            ],
+          ),
+        ),
+      );
+    },
+  );
+}
+
+closeLoadingDialog(BuildContext context) {
+  Navigator.of(context, rootNavigator: true).pop();
+}

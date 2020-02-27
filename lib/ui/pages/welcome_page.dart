@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:instagram/bloc/sign_in/sign_in_bloc.dart';
+import 'package:instagram/bloc/sign_up/sign_up_bloc.dart';
 import 'package:instagram/data/repositories/auth_repository.dart';
 import 'package:instagram/ui/pages/sign_in_page.dart';
 import 'package:instagram/ui/pages/sign_up_page.dart';
@@ -98,7 +99,12 @@ class WelcomePage extends StatelessWidget {
 
   void _navigateToSignUpPage(BuildContext context) {
     Navigator.push(context, MaterialPageRoute(builder: (context) {
-      return SignUpPage();
+      return BlocProvider(
+        child: SignUpPage(),
+        create: (BuildContext context) {
+          return SignUpBloc(repository: AuthRepositoryImpl());
+        },
+      );
     }));
   }
 }

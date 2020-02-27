@@ -9,7 +9,7 @@ class SignInInitialState extends SignInState {
   List<Object> get props => [];
 }
 
-class ArticleLoadingState extends SignInState {
+class SignInLoadingState extends SignInState {
   @override
   List<Object> get props => [];
 }

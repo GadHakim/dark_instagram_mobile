@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:instagram/bloc/sign_in/sign_in_bloc.dart';
-import 'package:instagram/data/repositories/sign_in_repository.dart';
+import 'package:instagram/data/repositories/auth_repository.dart';
 import 'package:instagram/ui/pages/sign_in_page.dart';
 import 'package:instagram/ui/pages/sign_up_page.dart';
 import 'package:instagram/utils/gradients.dart';
@@ -89,7 +89,7 @@ class WelcomePage extends StatelessWidget {
         return BlocProvider(
           child: SignInPage(),
           create: (BuildContext context) {
-            return SignInBloc(repository: SignInRepositoryImpl());
+            return SignInBloc(repository: AuthRepositoryImpl());
           },
         );
       }),

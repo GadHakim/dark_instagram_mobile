@@ -3,13 +3,19 @@ import 'package:instagram/config.dart';
 import 'package:instagram/data/models/sign_in_model.dart';
 import 'package:instagram/utils/http.dart';
 
-abstract class SignInRepository {
-  Future<SignInModel> signIn(String email, String password);
+abstract class AuthRepository {
+  Future<SignInModel> signIn(
+    String email,
+    String password,
+  );
 }
 
-class SignInRepositoryImpl extends SignInRepository {
+class AuthRepositoryImpl extends AuthRepository {
   @override
-  Future<SignInModel> signIn(String email, String password) async {
+  Future<SignInModel> signIn(
+    String email,
+    String password,
+  ) async {
     var response = await http.post(Internet.SIGN_IN, body: {
       "email": email,
       "password": password,

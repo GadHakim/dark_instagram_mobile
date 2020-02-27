@@ -149,7 +149,7 @@ class _SignInPageState extends State<SignInPage> {
   }
 
   _blocListener(BuildContext context, SignInState state) {
-    if (state is ArticleLoadingState) {
+    if (state is SignInLoadingState) {
       showLoadingDialog(context);
     } else if (state is SignInLoadedState) {
       closeLoadingDialog(context);

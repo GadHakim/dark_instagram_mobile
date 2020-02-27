@@ -1,4 +1,5 @@
 import 'package:instagram/data/models/sign_in_model.dart';
+import 'package:instagram/data/models/sign_up_model.dart';
 
 class Store {
   static final Store _singleton = Store._internal();
@@ -15,6 +16,11 @@ class Store {
     _refreshToken = model.result.refreshToken;
   }
 
+  set signUpModel(SignUpModel model) {
+    _accessToken = model.result.accessToken;
+    _refreshToken = model.result.refreshToken;
+  }
+
   factory Store() {
     return _singleton;
   }
@@ -23,9 +29,10 @@ class Store {
 
   @override
   String toString() {
-    return 'Singleton{'
-        'accessToken: $_accessToken, '
-        'refreshToken: $_refreshToken'
-        '}';
+    return ''
+        'Store'
+        '[accessToken: $_accessToken] '
+        '[refreshToken: $_refreshToken]'
+        '';
   }
 }

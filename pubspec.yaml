@@ -27,3 +27,6 @@ flutter:
     - family: Billabong
       fonts:
         - asset: assets/fonts/Billabong.ttf
+
+  assets:
+    - assets/images/

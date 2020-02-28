@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:instagram/bloc/home/home_bloc.dart';
 import 'package:instagram/bloc/sign_in/sign_in_bloc.dart';
 import 'package:instagram/bloc/sign_in/sign_in_event.dart';
 import 'package:instagram/bloc/sign_in/sign_in_state.dart';
+import 'package:instagram/data/repositories/people_repository.dart';
+import 'package:instagram/data/store.dart';
+import 'package:instagram/ui/pages/home_page.dart';
 import 'package:instagram/utils/alerts.dart';
 import 'package:instagram/utils/gradients.dart';
 import 'package:instagram/utils/keyboard.dart';
-import 'package:instagram/data/store.dart';
 
 class SignInPage extends StatefulWidget {
   SignInPage();
@@ -154,6 +157,7 @@ class _SignInPageState extends State<SignInPage> {
     } else if (state is SignInLoadedState) {
       closeLoadingDialog(context);
       _store.token = state.signInModel;
+      _navigateToHomePage(context);
     } else if (state is SignInErrorState) {
       closeLoadingDialog(context);
       showDialogMessage(context, 'Error', state.message);
@@ -166,5 +170,21 @@ class _SignInPageState extends State<SignInPage> {
       _email,
       _password,
     ));
+  }
+
+  void _navigateToHomePage(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) {
+        return BlocProvider(
+          child: HomePage(),
+          create: (BuildContext context) {
+            return HomeBloc(
+              peopleRepository: PeopleRepositoryImpl(),
+            );
+          },
+        );
+      }),
+    );
   }
 }

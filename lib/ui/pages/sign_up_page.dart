@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:instagram/bloc/home/home_bloc.dart';
 import 'package:instagram/bloc/sign_up/sign_up_bloc.dart';
 import 'package:instagram/bloc/sign_up/sign_up_event.dart';
 import 'package:instagram/bloc/sign_up/sign_up_state.dart';
+import 'package:instagram/data/repositories/people_repository.dart';
 import 'package:instagram/data/store.dart';
+import 'package:instagram/ui/pages/home_page.dart';
 import 'package:instagram/utils/alerts.dart';
 import 'package:instagram/utils/gradients.dart';
 import 'package:instagram/utils/keyboard.dart';
@@ -206,6 +209,7 @@ class _SignUpPageState extends State<SignUpPage> {
     } else if (state is SignUpLoadedState) {
       closeLoadingDialog(context);
       _store.signUpModel = state.signUpModel;
+      _navigateToHomePage(context);
     } else if (state is SignUpErrorState) {
       closeLoadingDialog(context);
       showDialogMessage(context, 'Error', state.message);
@@ -220,5 +224,21 @@ class _SignUpPageState extends State<SignUpPage> {
       _email,
       _password,
     ));
+  }
+
+  void _navigateToHomePage(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) {
+        return BlocProvider(
+          child: HomePage(),
+          create: (BuildContext context) {
+            return HomeBloc(
+              peopleRepository: PeopleRepositoryImpl(),
+            );
+          },
+        );
+      }),
+    );
   }
 }

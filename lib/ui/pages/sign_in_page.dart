@@ -9,6 +9,7 @@ import 'package:instagram/data/store.dart';
 import 'package:instagram/ui/pages/home_page.dart';
 import 'package:instagram/utils/alerts.dart';
 import 'package:instagram/utils/gradients.dart';
+import 'package:instagram/utils/http.dart';
 import 'package:instagram/utils/keyboard.dart';
 
 class SignInPage extends StatefulWidget {
@@ -180,7 +181,9 @@ class _SignInPageState extends State<SignInPage> {
           child: HomePage(),
           create: (BuildContext context) {
             return HomeBloc(
-              peopleRepository: PeopleRepositoryImpl(),
+              peopleRepository: PeopleRepositoryImpl(
+                HttpImpl(),
+              ),
             );
           },
         );

@@ -1,6 +1,6 @@
-import 'package:http/http.dart' as http;
+import 'package:http/http.dart';
+import 'package:instagram/config.dart';
 import 'package:instagram/data/models/people_model.dart';
-import 'package:instagram/data/store.dart';
 import 'package:instagram/utils/http.dart';
 
 abstract class PeopleRepository {
@@ -10,21 +10,19 @@ abstract class PeopleRepository {
 }
 
 class PeopleRepositoryImpl extends PeopleRepository {
-  Store _store = Store();
+  final Http http;
+
+  PeopleRepositoryImpl(this.http);
 
   @override
   Future<PeopleModel> getPeople({
     int limit = 10,
   }) async {
-    var uri = Uri.http('192.168.0.100:3000', 'people', {
+    Response response = await http.get(Endpoint.PEOPLE, {
       'limit': limit.toString(),
     });
 
-    var response = await http.get(uri, headers: {
-      "Authorization": "Bearer ${_store.accessToken}",
-    });
-
-    return request(response, (data) {
+    return Http.readResponse(response, (data) {
       return PeopleModel.fromJson(data);
     });
   }

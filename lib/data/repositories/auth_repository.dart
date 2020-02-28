@@ -24,12 +24,18 @@ class AuthRepositoryImpl extends AuthRepository {
     String email,
     String password,
   ) async {
-    var response = await http.post(Internet.SIGN_IN, body: {
-      "email": email,
-      "password": password,
-    });
+    var response = await http.post(
+      Uri.http(
+        Endpoint.BASE_URL,
+        Endpoint.LOGIN,
+      ),
+      body: {
+        "email": email,
+        "password": password,
+      },
+    );
 
-    return request(response, (data) {
+    return Http.readResponse(response, (data) {
       return SignInModel.fromJson(data);
     });
   }
@@ -41,15 +47,21 @@ class AuthRepositoryImpl extends AuthRepository {
     String email,
     String password,
   ) async {
-    var response = await http.post(Internet.SIGN_UP, body: {
-      "first_name": firstName,
-      "last_name": lastName,
-      "email": email,
-      "password": password,
-    });
+    var response = await http.post(
+      Uri.http(
+        Endpoint.BASE_URL,
+        Endpoint.REGISTRATION,
+      ),
+      body: {
+        "first_name": firstName,
+        "last_name": lastName,
+        "email": email,
+        "password": password,
+      },
+    );
 
-    return request(response, (data) {
+    return Http.readResponse(response, (data) {
       return SignUpModel.fromJson(data);
-    }, statusCodeSuccess: 201);
+    }, successStatusCode: 201);
   }
 }

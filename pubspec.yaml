@@ -13,6 +13,7 @@ dependencies:
   flutter_bloc: ^2.0.0
   equatable: ^0.6.1
   page_view_indicator: ^2.0.4
+  image_picker: ^0.6.3+4
 
   cupertino_icons: ^0.1.2
 

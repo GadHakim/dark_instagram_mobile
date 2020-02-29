@@ -7,7 +7,7 @@ import 'package:instagram/bloc/sign_up/sign_up_state.dart';
 import 'package:instagram/data/repositories/people_repository.dart';
 import 'package:instagram/data/repositories/post_repository.dart';
 import 'package:instagram/data/store.dart';
-import 'package:instagram/ui/pages/home_page.dart';
+import 'package:instagram/ui/pages/main_page.dart';
 import 'package:instagram/utils/alerts.dart';
 import 'package:instagram/utils/gradients.dart';
 import 'package:instagram/utils/http.dart';
@@ -242,7 +242,7 @@ class _SignUpPageState extends State<SignUpPage> {
       context,
       MaterialPageRoute(builder: (context) {
         return BlocProvider(
-          child: HomePage(),
+          child: MainPage(),
           create: (BuildContext context) {
             return HomeBloc(
               peopleRepository: PeopleRepositoryImpl(

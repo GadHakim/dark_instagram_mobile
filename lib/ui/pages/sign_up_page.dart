@@ -102,7 +102,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                   Form(
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
                         Container(

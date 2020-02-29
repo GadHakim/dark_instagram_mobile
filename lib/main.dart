@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         brightness: Brightness.dark,
         primaryColor: Colors.lightBlue[800],
-        accentColor: Colors.cyan[600],
+        accentColor: Colors.lightBlueAccent[400],
       ),
       home: WelcomePage(),
     );

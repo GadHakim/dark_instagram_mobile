@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:instagram/ui/pages/home_page.dart';
+import 'package:instagram/ui/pages/post_creation_page.dart';
+import 'package:instagram/ui/pages/search_page.dart';
 
 class MainPage extends StatefulWidget {
   @override
@@ -21,6 +23,8 @@ class _MainPageState extends State<MainPage> {
           index: _currentTab,
           children: <Widget>[
             HomePage(),
+            SearchPage(),
+            PostCreationPage(),
           ],
         ),
       ),

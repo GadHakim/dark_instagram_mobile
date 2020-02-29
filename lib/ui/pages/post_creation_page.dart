@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class PostCreationPage extends StatefulWidget {
   @override
@@ -6,11 +9,22 @@ class PostCreationPage extends StatefulWidget {
 }
 
 class _PostCreationPageState extends State<PostCreationPage> {
+
+  List<File> _images = [];
+
+  Future getImage() async {
+    var image = await ImagePicker.pickImage(source: ImageSource.camera);
+
+    setState(() {
+      _images.add(image);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Center(
-        child: Text('Post Creation Page'),
+    return Scaffold(
+      body: Center(
+
       ),
     );
   }

@@ -14,6 +14,11 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add_box),
+        onPressed: () => _navigateToPostCreationPage(),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: _buildBottomNavigationBar(),
       body: SafeArea(
         top: false,
@@ -49,6 +54,15 @@ class _MainPageState extends State<MainPage> {
       }).toList(),
     );
   }
+
+  void _navigateToPostCreationPage() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) {
+        return PostCreationPage();
+      }),
+    );
+  }
 }
 
 class MainAppBarItem {
@@ -60,7 +74,6 @@ class MainAppBarItem {
 List<MainAppBarItem> allMainAppBarItem = <MainAppBarItem>[
   MainAppBarItem(Icons.home),
   MainAppBarItem(Icons.search),
-  MainAppBarItem(Icons.add_box),
   MainAppBarItem(Icons.favorite),
   MainAppBarItem(Icons.person),
 ];

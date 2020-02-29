@@ -234,10 +234,10 @@ class _SignUpPageState extends State<SignUpPage> {
   _signUpRequest(BuildContext context) {
     closeKeyboard(context);
     _signUpBloc.add(FetchSignUpEvent(
-      _firstName,
-      _lastName,
-      _email,
-      _password,
+      _firstName.trim(),
+      _lastName.trim(),
+      _email.trim(),
+      _password.trim(),
     ));
   }
 

@@ -19,8 +19,6 @@ class _HomePageState extends State<HomePage> {
   PeopleModel _peopleModel;
   SubscribersPostsModel _subscribersPostsModel;
 
-  int _currentTab = 0;
-
   HomeBloc _homeBloc;
 
   @override
@@ -32,95 +30,24 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.blueGrey[800],
-        leading: IconButton(
-          icon: Icon(Icons.camera_alt),
-          onPressed: () {},
-        ),
-        title: Text(
-          'Instagram',
-          style: TextStyle(
-            fontFamily: 'Billabong',
-            fontSize: 24.0,
-          ),
-        ),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.send),
-            onPressed: () {},
-          ),
-        ],
+    return Container(
+      decoration: BoxDecoration(
+        gradient: darkBackgroundGradient(),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        fixedColor: Colors.white,
-        unselectedItemColor: Colors.grey[400],
-        backgroundColor: Colors.blueGrey[900],
-        currentIndex: _currentTab,
-        onTap: (int value) {
-          setState(() {
-            _currentTab = value;
-          });
-        },
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.home,
-              size: 30.0,
-            ),
-            title: SizedBox.shrink(),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.search,
-              size: 30.0,
-            ),
-            title: SizedBox.shrink(),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.add_box,
-              size: 30.0,
-            ),
-            title: SizedBox.shrink(),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.favorite,
-              size: 30.0,
-            ),
-            title: SizedBox.shrink(),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.person,
-              size: 30.0,
-            ),
-            title: SizedBox.shrink(),
-          ),
-        ],
-      ),
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: darkBackgroundGradient(),
-        ),
-        child: BlocListener<HomeBloc, HomeState>(
-          listener: (BuildContext context, HomeState state) => _blocListener(context, state),
-          child: BlocBuilder<HomeBloc, HomeState>(
-            builder: (BuildContext context, state) {
-              if (state is HomeLoadingState) {
-                return _buildHomeLoading();
-              } else if (state is HomeLoadedState) {
-                return _buildHomeLoaded();
-              } else if (state is HomeErrorState) {
-                return _buildHomeError();
-              } else {
-                return _buildHomeUnknownError();
-              }
-            },
-          ),
+      child: BlocListener<HomeBloc, HomeState>(
+        listener: (BuildContext context, HomeState state) => _blocListener(context, state),
+        child: BlocBuilder<HomeBloc, HomeState>(
+          builder: (BuildContext context, state) {
+            if (state is HomeLoadingState) {
+              return _buildHomeLoading();
+            } else if (state is HomeLoadedState) {
+              return _buildHomeLoaded();
+            } else if (state is HomeErrorState) {
+              return _buildHomeError();
+            } else {
+              return _buildHomeUnknownError();
+            }
+          },
         ),
       ),
     );

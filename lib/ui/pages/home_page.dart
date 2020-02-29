@@ -192,10 +192,10 @@ class _HomePageState extends State<HomePage> {
           itemCount: _allPostModel.result.length,
           itemBuilder: (BuildContext context, int index) {
             final AllPost allPost = _allPostModel.result[index];
-            final controller = PageController(
-            );
+            final controller = PageController();
             final valueNotifier = ValueNotifier(0);
             return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -246,63 +246,145 @@ class _HomePageState extends State<HomePage> {
                       controller: controller,
                       itemCount: allPost.content.length,
                       itemBuilder: (BuildContext context, int index) {
-
                         return Image.network(
                           allPost.content[index].contentPath,
                           fit: BoxFit.fitWidth,
                         );
                       }),
                 ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Row(
+                      children: <Widget>[
+                        IconButton(
+                          icon: Icon(
+                            Icons.favorite_border,
+                          ),
+                          onPressed: () {},
+                        ),
+                        IconButton(
+                          icon: Icon(
+                            Icons.message,
+                          ),
+                          onPressed: () {},
+                        ),
+                        IconButton(
+                          icon: Icon(
+                            Icons.send,
+                          ),
+                          onPressed: () {},
+                        ),
+                      ],
+                    ),
+                    PageViewIndicator(
+                      length: allPost.content.length,
+                      normalBuilder: (animationController, index) => Circle(
+                        size: 8.0,
+                        color: Colors.black87,
+                      ),
+                      highlightedBuilder: (animationController, index) => ScaleTransition(
+                        scale: CurvedAnimation(
+                          parent: animationController,
+                          curve: Curves.ease,
+                        ),
+                        child: Circle(
+                          size: 8.0,
+                          color: Theme.of(context).accentColor,
+                        ),
+                      ),
+                      pageIndexNotifier: valueNotifier,
+                    ),
+                    IconButton(
+                      icon: Icon(
+                        Icons.turned_in_not,
+                      ),
+                      onPressed: () {},
+                    ),
+                  ],
+                ),
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: EdgeInsets.symmetric(horizontal: 12.0),
+                  child: Text('Like: ${allPost.likeCount}'),
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
+                  child: Text(allPost.comment),
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 12.0),
+                  child: Text('View all comments: ${allPost.comments.length}'),
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       Row(
                         children: <Widget>[
-                          IconButton(
-                            icon: Icon(
-                              Icons.favorite_border,
+                          Container(
+                            padding: EdgeInsets.all(1.0),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(35.0),
                             ),
-                            onPressed: () {},
+                            child: CircleAvatar(
+//                          backgroundColor: Colors.black.withOpacity(.5),
+                              radius: 12.0,
+                              backgroundImage: AssetImage('assets/images/user.png'),
+                            ),
                           ),
-                          IconButton(
-                            icon: Icon(
-                              Icons.message,
-                            ),
-                            onPressed: () {},
+                          SizedBox(
+                            width: 8.0,
                           ),
-                          IconButton(
-                            icon: Icon(
-                              Icons.send,
+                          Text(
+                            "Add a comment...",
+                            style: TextStyle(
+                              fontSize: 14.0,
+                              fontWeight: FontWeight.w200,
                             ),
-                            onPressed: () {},
                           ),
                         ],
                       ),
-                      PageViewIndicator(
-                        length: allPost.content.length,
-                        normalBuilder: (animationController, index) => Circle(
-                          size: 8.0,
-                          color: Colors.black87,
-                        ),
-                        highlightedBuilder: (animationController, index) => ScaleTransition(
-                          scale: CurvedAnimation(
-                            parent: animationController,
-                            curve: Curves.ease,
+                      Row(
+                        children: <Widget>[
+                          Icon(
+                            Icons.favorite,
+                            size: 16.0,
                           ),
-                          child: Circle(
-                            size: 8.0,
-                            color: Theme.of(context).accentColor,
+                          SizedBox(width: 8.0),
+                          Icon(
+                            Icons.sentiment_satisfied,
+                            size: 16.0,
                           ),
-                        ),
-                        pageIndexNotifier: valueNotifier,
+                          SizedBox(width: 8.0),
+                          Icon(
+                            Icons.add_circle_outline,
+                            size: 16.0,
+                          ),
+                        ],
                       ),
-                      IconButton(
-                        icon: Icon(
-                          Icons.turned_in_not,
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 12.0),
+                  child: Row(
+                    children: <Widget>[
+                      Text(
+                        "9 hours ago",
+                        style: TextStyle(
+                          fontSize: 10.0,
+                          fontWeight: FontWeight.w100,
                         ),
-                        onPressed: () {},
+                      ),
+                      SizedBox(width: 8.0),
+                      Text(
+                        "Show translate",
+                        style: TextStyle(
+                          fontSize: 10.0,
+                          fontWeight: FontWeight.w400,
+                        ),
                       ),
                     ],
                   ),

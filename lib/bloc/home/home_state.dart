@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:instagram/data/models/all_post_model.dart';
 import 'package:instagram/data/models/people_model.dart';
 import 'package:meta/meta.dart';
 
@@ -16,8 +17,12 @@ class HomeLoadingState extends HomeState {
 
 class HomeLoadedState extends HomeState {
   final PeopleModel peopleModel;
+  final AllPostModel allPostModel;
 
-  HomeLoadedState({@required this.peopleModel});
+  HomeLoadedState({
+    @required this.peopleModel,
+    @required this.allPostModel,
+  });
 
   @override
   List<Object> get props => [PeopleModel];

@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 
 LinearGradient darkBackgroundGradient() {
   return LinearGradient(
-      begin: Alignment.topRight,
-      end: Alignment.bottomLeft,
-      colors: [
-        Colors.black12,
-        Colors.black54,
-      ]);
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
+    colors: [
+      Colors.green[300].withOpacity(.8),
+      Colors.indigo[700].withOpacity(.7),
+    ],
+  );
 }

@@ -17,6 +17,8 @@ class _HomePageState extends State<HomePage> {
   PeopleModel _peopleModel;
   AllPostModel _allPostModel;
 
+  int _currentTab = 0;
+
   HomeBloc _homeBloc;
 
   @override
@@ -49,6 +51,52 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _currentTab,
+        onTap: (int value) {
+          setState(() {
+            _currentTab = value;
+          });
+        },
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.home,
+              size: 30.0,
+            ),
+            title: SizedBox.shrink(),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.search,
+              size: 30.0,
+            ),
+            title: SizedBox.shrink(),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.add_box,
+              size: 30.0,
+            ),
+            title: SizedBox.shrink(),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.favorite,
+              size: 30.0,
+            ),
+            title: SizedBox.shrink(),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.person,
+              size: 30.0,
+            ),
+            title: SizedBox.shrink(),
+          ),
+        ],
+      ),
+
       body: BlocListener<HomeBloc, HomeState>(
         listener: (BuildContext context, HomeState state) => _blocListener(context, state),
         child: BlocBuilder<HomeBloc, HomeState>(

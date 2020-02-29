@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:instagram/bloc/home/home_bloc.dart';
 import 'package:instagram/bloc/home/home_event.dart';
 import 'package:instagram/bloc/home/home_state.dart';
-import 'package:instagram/data/models/all_post_model.dart';
 import 'package:instagram/data/models/people_model.dart';
+import 'package:instagram/data/models/subscribers_posts_model.dart';
 import 'package:instagram/utils/alerts.dart';
 import 'package:instagram/utils/gradients.dart';
 import 'package:instagram/utils/text.dart';
@@ -17,7 +17,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   PeopleModel _peopleModel;
-  AllPostModel _allPostModel;
+  SubscribersPostsModel _subscribersPostsModel;
 
   int _currentTab = 0;
 
@@ -132,7 +132,7 @@ class _HomePageState extends State<HomePage> {
     } else if (state is HomeLoadedState) {
       closeLoadingDialog(context);
       _peopleModel = state.peopleModel;
-      _allPostModel = state.allPostModel;
+      _subscribersPostsModel = state.subscribersPostsModel;
     } else if (state is HomeErrorState) {
       closeLoadingDialog(context);
       showDialogMessage(context, 'Error', state.message);
@@ -252,9 +252,9 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           child: ListView.builder(
-            itemCount: _allPostModel.result.length,
+            itemCount: _subscribersPostsModel.result.length,
             itemBuilder: (BuildContext context, int index) {
-              final AllPost allPost = _allPostModel.result[index];
+              final SubscribersPost subscribersPost = _subscribersPostsModel.result[index];
               final controller = PageController();
               final valueNotifier = ValueNotifier(0);
               return Column(
@@ -274,10 +274,10 @@ class _HomePageState extends State<HomePage> {
                                 borderRadius: BorderRadius.circular(35.0),
                               ),
                               child: CircleAvatar(
-//                          backgroundColor: Colors.black.withOpacity(.5),
+                                backgroundColor: Theme.of(context).primaryColor,
                                 radius: 20.0,
-                                backgroundImage: allPost.postCreator.avatarImagePath != null
-                                    ? NetworkImage(allPost.postCreator.avatarImagePath)
+                                backgroundImage: subscribersPost.postCreator.avatarImagePath != null
+                                    ? NetworkImage(subscribersPost.postCreator.avatarImagePath)
                                     : AssetImage('assets/images/user.png'),
                               ),
                             ),
@@ -285,7 +285,7 @@ class _HomePageState extends State<HomePage> {
                               width: 8.0,
                             ),
                             Text(
-                              "${allPost.postCreator.firstName}",
+                              "${subscribersPost.postCreator.firstName}",
                               style: TextStyle(
                                 fontSize: 14.0,
                                 fontWeight: FontWeight.w600,
@@ -301,17 +301,17 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   Container(
-                    height: 250,
+                    height: subscribersPost.contentHeight.toDouble() / 2,
                     child: PageView.builder(
                         onPageChanged: (index) {
                           valueNotifier.value = index;
                         },
                         controller: controller,
-                        itemCount: allPost.content.length,
+                        itemCount: subscribersPost.content.length,
                         itemBuilder: (BuildContext context, int index) {
                           return Image.network(
-                            allPost.content[index].contentPath,
-                            fit: BoxFit.fitWidth,
+                            subscribersPost.content[index].contentPath,
+                            fit: BoxFit.cover,
                           );
                         }),
                   ),
@@ -356,7 +356,7 @@ class _HomePageState extends State<HomePage> {
                                 right: 8.0,
                                 bottom: 8.0,
                                 child: PageViewIndicator(
-                                  length: allPost.content.length,
+                                  length: subscribersPost.content.length,
                                   normalBuilder: (animationController, index) => Circle(
                                     size: 8.0,
                                     color: Colors.grey,
@@ -394,15 +394,15 @@ class _HomePageState extends State<HomePage> {
                   ),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 12.0),
-                    child: Text('Like: ${allPost.likeCount}'),
+                    child: Text('Like: ${subscribersPost.likeCount}'),
                   ),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
-                    child: Text(allPost.comment),
+                    child: Text(subscribersPost.comment),
                   ),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 12.0),
-                    child: Text('View all comments: ${allPost.comments.length}'),
+                    child: Text('View all comments: ${subscribersPost.comments.length}'),
                   ),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
@@ -418,7 +418,7 @@ class _HomePageState extends State<HomePage> {
                                 borderRadius: BorderRadius.circular(35.0),
                               ),
                               child: CircleAvatar(
-//                          backgroundColor: Colors.black.withOpacity(.5),
+                                backgroundColor: Theme.of(context).primaryColor,
                                 radius: 12.0,
                                 backgroundImage: AssetImage('assets/images/user.png'),
                               ),

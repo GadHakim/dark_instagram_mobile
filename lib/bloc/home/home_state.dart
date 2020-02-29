@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
-import 'package:instagram/data/models/all_post_model.dart';
 import 'package:instagram/data/models/people_model.dart';
+import 'package:instagram/data/models/subscribers_posts_model.dart';
 import 'package:meta/meta.dart';
 
 abstract class HomeState extends Equatable {}
@@ -17,11 +17,11 @@ class HomeLoadingState extends HomeState {
 
 class HomeLoadedState extends HomeState {
   final PeopleModel peopleModel;
-  final AllPostModel allPostModel;
+  final SubscribersPostsModel subscribersPostsModel;
 
   HomeLoadedState({
     @required this.peopleModel,
-    @required this.allPostModel,
+    @required this.subscribersPostsModel,
   });
 
   @override

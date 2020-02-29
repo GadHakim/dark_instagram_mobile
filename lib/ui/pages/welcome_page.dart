@@ -43,43 +43,40 @@ class WelcomePage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.end,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-                      Container(
-                        width: MediaQuery.of(context).size.width * .8,
-                        child: RaisedButton(
-                          textColor: Colors.white,
-                          color: Colors.green[300].withOpacity(.8),
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(vertical: 16.0),
-                            child: Text(
-                              "Sign In",
-                              style: TextStyle(fontSize: 18.0),
-                            ),
+                      RaisedButton(
+                        textColor: Colors.white,
+                        color: Colors.purple[700],
+                        child: Padding(
+                          padding: EdgeInsets.all(16.0),
+                          child: Text(
+                            "Sign In",
+                            style: TextStyle(fontSize: 18.0),
                           ),
-                          onPressed: () => _navigateToSignInPage(context),
-                          shape: new RoundedRectangleBorder(
-                            borderRadius: new BorderRadius.circular(30.0),
-                          ),
+                        ),
+                        onPressed: () => _navigateToSignInPage(context),
+                        shape: new RoundedRectangleBorder(
+                          borderRadius: new BorderRadius.circular(30.0),
                         ),
                       ),
                       SizedBox(
                         height: 16.0,
                       ),
-                      Container(
-                        width: MediaQuery.of(context).size.width * .8,
-                        child: RaisedButton(
-                          color: Colors.blue[700].withOpacity(.7),
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 64.0),
-                            child: Text(
-                              "Sign Up",
-                              style: TextStyle(fontSize: 18.0),
-                            ),
-                          ),
-                          onPressed: () => _navigateToSignUpPage(context),
-                          shape: new RoundedRectangleBorder(
-                            borderRadius: new BorderRadius.circular(30.0),
+                      RaisedButton(
+                        color: Colors.deepPurple[600],
+                        child: Padding(
+                          padding: EdgeInsets.all(16.0),
+                          child: Text(
+                            "Sign Up",
+                            style: TextStyle(fontSize: 18.0),
                           ),
                         ),
+                        onPressed: () => _navigateToSignUpPage(context),
+                        shape: new RoundedRectangleBorder(
+                          borderRadius: new BorderRadius.circular(30.0),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 16.0,
                       ),
                     ],
                   ),

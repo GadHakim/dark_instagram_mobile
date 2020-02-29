@@ -252,56 +252,81 @@ class _HomePageState extends State<HomePage> {
                         );
                       }),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Row(
-                      children: <Widget>[
-                        IconButton(
-                          icon: Icon(
-                            Icons.favorite_border,
-                          ),
-                          onPressed: () {},
+                Container(
+                  height: 50.0,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Expanded(
+                        child: Stack(
+                          children: <Widget>[
+                            Positioned(
+                              left: 8.0,
+                              top: 8.0,
+                              bottom: 8.0,
+                              child: Row(
+                                children: <Widget>[
+                                  IconButton(
+                                    icon: Icon(
+                                      Icons.favorite_border,
+                                    ),
+                                    onPressed: () {},
+                                  ),
+                                  IconButton(
+                                    icon: Icon(
+                                      Icons.message,
+                                    ),
+                                    onPressed: () {},
+                                  ),
+                                  IconButton(
+                                    icon: Icon(
+                                      Icons.send,
+                                    ),
+                                    onPressed: () {},
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Positioned(
+                              top: 8.0,
+                              left: 8.0,
+                              right: 8.0,
+                              bottom: 8.0,
+                              child: PageViewIndicator(
+                                length: allPost.content.length,
+                                normalBuilder: (animationController, index) => Circle(
+                                  size: 8.0,
+                                  color: Colors.black87,
+                                ),
+                                highlightedBuilder: (animationController, index) => ScaleTransition(
+                                  scale: CurvedAnimation(
+                                    parent: animationController,
+                                    curve: Curves.ease,
+                                  ),
+                                  child: Circle(
+                                    size: 8.0,
+                                    color: Theme.of(context).accentColor,
+                                  ),
+                                ),
+                                pageIndexNotifier: valueNotifier,
+                              ),
+                            ),
+                            Positioned(
+                              right: 8.0,
+                              top: 8.0,
+                              bottom: 8.0,
+                              child: IconButton(
+                                icon: Icon(
+                                  Icons.turned_in_not,
+                                ),
+                                onPressed: () {},
+                              ),
+                            ),
+                          ],
                         ),
-                        IconButton(
-                          icon: Icon(
-                            Icons.message,
-                          ),
-                          onPressed: () {},
-                        ),
-                        IconButton(
-                          icon: Icon(
-                            Icons.send,
-                          ),
-                          onPressed: () {},
-                        ),
-                      ],
-                    ),
-                    PageViewIndicator(
-                      length: allPost.content.length,
-                      normalBuilder: (animationController, index) => Circle(
-                        size: 8.0,
-                        color: Colors.black87,
                       ),
-                      highlightedBuilder: (animationController, index) => ScaleTransition(
-                        scale: CurvedAnimation(
-                          parent: animationController,
-                          curve: Curves.ease,
-                        ),
-                        child: Circle(
-                          size: 8.0,
-                          color: Theme.of(context).accentColor,
-                        ),
-                      ),
-                      pageIndexNotifier: valueNotifier,
-                    ),
-                    IconButton(
-                      icon: Icon(
-                        Icons.turned_in_not,
-                      ),
-                      onPressed: () {},
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 12.0),

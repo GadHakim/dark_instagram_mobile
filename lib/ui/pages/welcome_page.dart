@@ -23,12 +23,18 @@ class WelcomePage extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 32.0),
                   child: Center(
-                    child: Text(
-                      'Dark Instagram',
-                      style: TextStyle(
-                        fontFamily: 'Billabong',
-                        fontSize: 48.0,
-                      ),
+                    child: ImageIcon(
+                      AssetImage('assets/images/instagram.png'),
+                      size: 100.0,
+                    ),
+                  ),
+                ),
+                Center(
+                  child: Text(
+                    'Instagram',
+                    style: TextStyle(
+                      fontFamily: 'Billabong',
+                      fontSize: 48.0,
                     ),
                   ),
                 ),
@@ -37,40 +43,43 @@ class WelcomePage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.end,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-                      RaisedButton(
-                        textColor: Colors.white,
-                        color: Colors.black,
-                        child: Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: Text(
-                            "Sign In",
-                            style: TextStyle(fontSize: 18.0),
+                      Container(
+                        width: MediaQuery.of(context).size.width * .8,
+                        child: RaisedButton(
+                          textColor: Colors.white,
+                          color: Colors.green[300].withOpacity(.8),
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(vertical: 16.0),
+                            child: Text(
+                              "Sign In",
+                              style: TextStyle(fontSize: 18.0),
+                            ),
                           ),
-                        ),
-                        onPressed: () => _navigateToSignInPage(context),
-                        shape: new RoundedRectangleBorder(
-                          borderRadius: new BorderRadius.circular(30.0),
+                          onPressed: () => _navigateToSignInPage(context),
+                          shape: new RoundedRectangleBorder(
+                            borderRadius: new BorderRadius.circular(30.0),
+                          ),
                         ),
                       ),
                       SizedBox(
-                        height: 32.0,
+                        height: 16.0,
                       ),
-                      RaisedButton(
-                        color: Theme.of(context).accentColor,
-                        child: Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: Text(
-                            "Sign Up",
-                            style: TextStyle(fontSize: 18.0),
+                      Container(
+                        width: MediaQuery.of(context).size.width * .8,
+                        child: RaisedButton(
+                          color: Colors.blue[700].withOpacity(.7),
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 64.0),
+                            child: Text(
+                              "Sign Up",
+                              style: TextStyle(fontSize: 18.0),
+                            ),
+                          ),
+                          onPressed: () => _navigateToSignUpPage(context),
+                          shape: new RoundedRectangleBorder(
+                            borderRadius: new BorderRadius.circular(30.0),
                           ),
                         ),
-                        onPressed: () => _navigateToSignUpPage(context),
-                        shape: new RoundedRectangleBorder(
-                          borderRadius: new BorderRadius.circular(30.0),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 64.0,
                       ),
                     ],
                   ),

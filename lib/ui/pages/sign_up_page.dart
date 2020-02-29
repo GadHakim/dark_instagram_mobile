@@ -78,138 +78,134 @@ class _SignUpPageState extends State<SignUpPage> {
             decoration: BoxDecoration(
               gradient: darkBackgroundGradient(),
             ),
-            child: Stack(
-              children: <Widget>[
-                SingleChildScrollView(
-                  child: Column(
-                    children: <Widget>[
-                      Container(
-                        child: Row(
-                          children: <Widget>[
-                            BackButton(),
-                          ],
+            child: SingleChildScrollView(
+              child: Column(
+                children: <Widget>[
+                  Container(
+                    child: Row(
+                      children: <Widget>[
+                        BackButton(),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 32.0),
+                    child: Center(
+                      child: Text(
+                        'Instagram',
+                        style: TextStyle(
+                          fontFamily: 'Billabong',
+                          fontSize: 48.0,
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 32.0),
-                        child: Center(
-                          child: Text(
-                            'Instagram',
-                            style: TextStyle(
-                              fontFamily: 'Billabong',
-                              fontSize: 48.0,
-                            ),
+                    ),
+                  ),
+                  Form(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Container(
+                          width: MediaQuery.of(context).size.width * 0.5,
+                          child: TextFormField(
+                            onChanged: (firstName) {
+                              _firstName = firstName;
+                            },
+                            textInputAction: TextInputAction.next,
+                            textAlign: TextAlign.center,
+                            focusNode: _focusNodeFirstName,
+                            onFieldSubmitted: (term) {
+                              _focusNodeFirstName.unfocus();
+                              FocusScope.of(context).requestFocus(_focusNodeLastName);
+                            },
+                            decoration: InputDecoration(
+                                border: UnderlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15.0),
+                                  borderSide: BorderSide(color: Theme.of(context).accentColor),
+                                ),
+                                hintText: 'First Name'),
                           ),
                         ),
-                      ),
-                      Form(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: <Widget>[
-                            Container(
-                              width: MediaQuery.of(context).size.width * 0.5,
-                              child: TextFormField(
-                                onChanged: (firstName) {
-                                  _firstName = firstName;
-                                },
-                                textInputAction: TextInputAction.next,
-                                textAlign: TextAlign.center,
-                                focusNode: _focusNodeFirstName,
-                                onFieldSubmitted: (term) {
-                                  _focusNodeFirstName.unfocus();
-                                  FocusScope.of(context).requestFocus(_focusNodeLastName);
-                                },
-                                decoration: InputDecoration(
-                                    border: UnderlineInputBorder(
-                                      borderRadius: BorderRadius.circular(15.0),
-                                      borderSide: BorderSide(color: Theme.of(context).accentColor),
-                                    ),
-                                    hintText: 'First Name'),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 32.0,
-                            ),
-                            Container(
-                              width: MediaQuery.of(context).size.width * 0.5,
-                              child: TextFormField(
-                                onChanged: (lastName) {
-                                  _lastName = lastName;
-                                },
-                                textInputAction: TextInputAction.next,
-                                textAlign: TextAlign.center,
-                                focusNode: _focusNodeLastName,
-                                onFieldSubmitted: (term) {
-                                  _focusNodeLastName.unfocus();
-                                  FocusScope.of(context).requestFocus(_focusNodeEmail);
-                                },
-                                decoration: InputDecoration(
-                                    border: UnderlineInputBorder(
-                                      borderRadius: BorderRadius.circular(15.0),
-                                      borderSide: BorderSide(color: Theme.of(context).accentColor),
-                                    ),
-                                    hintText: 'Last Name'),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 32.0,
-                            ),
-                            Container(
-                              width: MediaQuery.of(context).size.width * 0.5,
-                              child: TextFormField(
-                                onChanged: (email) {
-                                  _email = email;
-                                },
-                                textInputAction: TextInputAction.next,
-                                textAlign: TextAlign.center,
-                                focusNode: _focusNodeEmail,
-                                onFieldSubmitted: (term) {
-                                  _focusNodeEmail.unfocus();
-                                  FocusScope.of(context).requestFocus(_focusNodePassword);
-                                },
-                                decoration: InputDecoration(
-                                    border: UnderlineInputBorder(
-                                      borderRadius: BorderRadius.circular(15.0),
-                                      borderSide: BorderSide(color: Theme.of(context).accentColor),
-                                    ),
-                                    hintText: 'Email'),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 32.0,
-                            ),
-                            Container(
-                              width: MediaQuery.of(context).size.width * 0.5,
-                              child: TextFormField(
-                                onChanged: (password) {
-                                  _password = password;
-                                },
-                                textInputAction: TextInputAction.done,
-                                textAlign: TextAlign.center,
-                                focusNode: _focusNodePassword,
-                                onFieldSubmitted: (term) {},
-                                decoration: InputDecoration(
-                                    border: UnderlineInputBorder(
-                                      borderRadius: BorderRadius.circular(15.0),
-                                      borderSide: BorderSide(color: Theme.of(context).accentColor),
-                                    ),
-                                    hintText: 'Password'),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 32.0,
-                            ),
-                            SizedBox(
-                              height: 64.0,
-                            ),
-                          ],
+                        SizedBox(
+                          height: 32.0,
                         ),
-                      ),
-                    ],
+                        Container(
+                          width: MediaQuery.of(context).size.width * 0.5,
+                          child: TextFormField(
+                            onChanged: (lastName) {
+                              _lastName = lastName;
+                            },
+                            textInputAction: TextInputAction.next,
+                            textAlign: TextAlign.center,
+                            focusNode: _focusNodeLastName,
+                            onFieldSubmitted: (term) {
+                              _focusNodeLastName.unfocus();
+                              FocusScope.of(context).requestFocus(_focusNodeEmail);
+                            },
+                            decoration: InputDecoration(
+                                border: UnderlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15.0),
+                                  borderSide: BorderSide(color: Theme.of(context).accentColor),
+                                ),
+                                hintText: 'Last Name'),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 32.0,
+                        ),
+                        Container(
+                          width: MediaQuery.of(context).size.width * 0.5,
+                          child: TextFormField(
+                            onChanged: (email) {
+                              _email = email;
+                            },
+                            textInputAction: TextInputAction.next,
+                            textAlign: TextAlign.center,
+                            focusNode: _focusNodeEmail,
+                            onFieldSubmitted: (term) {
+                              _focusNodeEmail.unfocus();
+                              FocusScope.of(context).requestFocus(_focusNodePassword);
+                            },
+                            decoration: InputDecoration(
+                                border: UnderlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15.0),
+                                  borderSide: BorderSide(color: Theme.of(context).accentColor),
+                                ),
+                                hintText: 'Email'),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 32.0,
+                        ),
+                        Container(
+                          width: MediaQuery.of(context).size.width * 0.5,
+                          child: TextFormField(
+                            onChanged: (password) {
+                              _password = password;
+                            },
+                            textInputAction: TextInputAction.done,
+                            textAlign: TextAlign.center,
+                            focusNode: _focusNodePassword,
+                            onFieldSubmitted: (term) {},
+                            decoration: InputDecoration(
+                                border: UnderlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15.0),
+                                  borderSide: BorderSide(color: Theme.of(context).accentColor),
+                                ),
+                                hintText: 'Password'),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 32.0,
+                        ),
+                        SizedBox(
+                          height: 64.0,
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

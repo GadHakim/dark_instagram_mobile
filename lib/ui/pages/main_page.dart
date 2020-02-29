@@ -10,12 +10,10 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   int _currentTab = 0;
-  MainAppBarItem _mainBarItem = allMainAppBarItem[0];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _mainBarItem.buildAppBar(),
       bottomNavigationBar: _buildBottomNavigationBar(),
       body: SafeArea(
         top: false,
@@ -41,7 +39,6 @@ class _MainPageState extends State<MainPage> {
       onTap: (int index) {
         setState(() {
           _currentTab = index;
-          _mainBarItem = allMainAppBarItem[index];
         });
       },
       items: allMainAppBarItem.map((MainAppBarItem destination) {
@@ -54,55 +51,16 @@ class _MainPageState extends State<MainPage> {
   }
 }
 
-abstract class MainAppBarItem {
+class MainAppBarItem {
   final IconData icon;
 
   const MainAppBarItem(this.icon);
-
-  AppBar buildAppBar();
-}
-
-class MainHomeAppBarItem extends MainAppBarItem {
-  MainHomeAppBarItem(IconData icon) : super(icon);
-
-  @override
-  AppBar buildAppBar() {
-    return AppBar(
-      backgroundColor: Colors.blueGrey[800],
-      leading: IconButton(
-        icon: Icon(Icons.camera_alt),
-        onPressed: () {},
-      ),
-      title: Text(
-        'Instagram',
-        style: TextStyle(
-          fontFamily: 'Billabong',
-          fontSize: 24.0,
-        ),
-      ),
-      actions: <Widget>[
-        IconButton(
-          icon: Icon(Icons.send),
-          onPressed: () {},
-        ),
-      ],
-    );
-  }
-}
-
-class MainEmptyBarItem extends MainAppBarItem {
-  MainEmptyBarItem(IconData icon) : super(icon);
-
-  @override
-  AppBar buildAppBar() {
-    return null;
-  }
 }
 
 List<MainAppBarItem> allMainAppBarItem = <MainAppBarItem>[
-  MainHomeAppBarItem(Icons.home),
-  MainEmptyBarItem(Icons.search),
-  MainEmptyBarItem(Icons.add_box),
-  MainEmptyBarItem(Icons.favorite),
-  MainEmptyBarItem(Icons.person),
+  MainAppBarItem(Icons.home),
+  MainAppBarItem(Icons.search),
+  MainAppBarItem(Icons.add_box),
+  MainAppBarItem(Icons.favorite),
+  MainAppBarItem(Icons.person),
 ];

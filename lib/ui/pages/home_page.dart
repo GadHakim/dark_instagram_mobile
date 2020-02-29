@@ -30,26 +30,52 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        gradient: darkBackgroundGradient(),
-      ),
-      child: BlocListener<HomeBloc, HomeState>(
-        listener: (BuildContext context, HomeState state) => _blocListener(context, state),
-        child: BlocBuilder<HomeBloc, HomeState>(
-          builder: (BuildContext context, state) {
-            if (state is HomeLoadingState) {
-              return _buildHomeLoading();
-            } else if (state is HomeLoadedState) {
-              return _buildHomeLoaded();
-            } else if (state is HomeErrorState) {
-              return _buildHomeError();
-            } else {
-              return _buildHomeUnknownError();
-            }
-          },
+    return Scaffold(
+      appBar: _buildAppBar(),
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: darkBackgroundGradient(),
+        ),
+        child: BlocListener<HomeBloc, HomeState>(
+          listener: (BuildContext context, HomeState state) => _blocListener(context, state),
+          child: BlocBuilder<HomeBloc, HomeState>(
+            builder: (BuildContext context, state) {
+              if (state is HomeLoadingState) {
+                return _buildHomeLoading();
+              } else if (state is HomeLoadedState) {
+                return _buildHomeLoaded();
+              } else if (state is HomeErrorState) {
+                return _buildHomeError();
+              } else {
+                return _buildHomeUnknownError();
+              }
+            },
+          ),
         ),
       ),
+    );
+  }
+
+  AppBar _buildAppBar() {
+    return AppBar(
+      backgroundColor: Colors.blueGrey[800],
+      leading: IconButton(
+        icon: Icon(Icons.camera_alt),
+        onPressed: () {},
+      ),
+      title: Text(
+        'Instagram',
+        style: TextStyle(
+          fontFamily: 'Billabong',
+          fontSize: 24.0,
+        ),
+      ),
+      actions: <Widget>[
+        IconButton(
+          icon: Icon(Icons.send),
+          onPressed: () {},
+        ),
+      ],
     );
   }
 

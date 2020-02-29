@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 
+Color _gradientStart = Colors.deepPurple[700];
+Color _gradientEnd = Colors.purple[500];
+
 LinearGradient darkBackgroundGradient() {
-  return LinearGradient(
-    begin: Alignment.topCenter,
-    end: Alignment.bottomCenter,
-    colors: [
-      Colors.green[300].withOpacity(.8),
-      Colors.indigo[700].withOpacity(.7),
-    ],
+  return LinearGradient(colors: [_gradientStart, _gradientEnd],
+      begin: const FractionalOffset(0.5, 0.0),
+      end: const FractionalOffset(0.0, 0.5),
+      stops: [0.0,1.0],
+      tileMode: TileMode.clamp
   );
 }

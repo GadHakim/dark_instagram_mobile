@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-Color _gradientStart = Colors.deepPurple[700];
-Color _gradientEnd = Colors.purple[500];
+Color _gradientStart = Colors.blueGrey[800];
+Color _gradientEnd = Colors.blueGrey[900];
 
 LinearGradient darkBackgroundGradient() {
   return LinearGradient(colors: [_gradientStart, _gradientEnd],

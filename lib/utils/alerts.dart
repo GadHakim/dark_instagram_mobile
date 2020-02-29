@@ -30,6 +30,7 @@ Future<void> showLoadingDialog(BuildContext context) {
     barrierDismissible: false,
     builder: (BuildContext context) {
       return AlertDialog(
+        backgroundColor: Theme.of(context).primaryColor,
         content: Container(
           child: Column(
             mainAxisSize: MainAxisSize.min,

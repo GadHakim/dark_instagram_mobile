@@ -43,7 +43,7 @@ class _SignInPageState extends State<SignInPage> {
     return Scaffold(
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
-          color: Colors.purple[500],
+          color: Theme.of(context).primaryColor,
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -51,7 +51,7 @@ class _SignInPageState extends State<SignInPage> {
             Padding(
               padding: EdgeInsets.only(bottom: 32.0),
               child: RaisedButton(
-                color: Colors.deepPurple[600],
+                color: Theme.of(context).accentColor,
                 child: Padding(
                   padding: EdgeInsets.all(16.0),
                   child: Text(

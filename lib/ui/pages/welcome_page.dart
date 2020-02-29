@@ -44,8 +44,8 @@ class WelcomePage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
                       RaisedButton(
-                        textColor: Colors.white,
-                        color: Colors.purple[700],
+                        textColor: Colors.black,
+                        color: Colors.white,
                         child: Padding(
                           padding: EdgeInsets.all(16.0),
                           child: Text(
@@ -62,7 +62,7 @@ class WelcomePage extends StatelessWidget {
                         height: 16.0,
                       ),
                       RaisedButton(
-                        color: Colors.deepPurple[600],
+                        color: Theme.of(context).accentColor,
                         child: Padding(
                           padding: EdgeInsets.all(16.0),
                           child: Text(

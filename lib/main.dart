@@ -11,8 +11,8 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         brightness: Brightness.dark,
-        primaryColor: Colors.lightBlue[800],
-        accentColor: Colors.lightBlueAccent[400],
+        primaryColor: Colors.blueGrey[900],
+        accentColor: Colors.green[600],
       ),
       home: WelcomePage(),
     );

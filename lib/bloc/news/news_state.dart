@@ -23,6 +23,20 @@ class NewsLoadedState extends NewsState {
   List<Object> get props => [news];
 }
 
+class NewsSubscribeState extends NewsState {
+  NewsSubscribeState();
+
+  @override
+  List<Object> get props => [];
+}
+
+class NewsUnsubscribeState extends NewsState {
+  NewsUnsubscribeState();
+
+  @override
+  List<Object> get props => [];
+}
+
 class NewsErrorState extends NewsState {
   final String message;
 

@@ -8,3 +8,21 @@ class FetchGetNewsEvent extends NewsEvent {
   @override
   List<Object> get props => null;
 }
+
+class FetchNewsSubscribeEvent extends NewsEvent {
+  final int subscriberId;
+
+  FetchNewsSubscribeEvent(this.subscriberId);
+
+  @override
+  List<Object> get props => null;
+}
+
+class FetchNewsUnsubscribeEvent extends NewsEvent {
+  final int subscriberId;
+
+  FetchNewsUnsubscribeEvent(this.subscriberId);
+
+  @override
+  List<Object> get props => null;
+}

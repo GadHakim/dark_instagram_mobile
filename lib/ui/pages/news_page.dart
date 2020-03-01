@@ -27,6 +27,7 @@ class _NewsPageState extends State<NewsPage> {
 
   @override
   Widget build(BuildContext context) {
+//    _initRequest();
     return Scaffold(
       appBar: _buildAppBar(),
       body: Container(
@@ -38,7 +39,7 @@ class _NewsPageState extends State<NewsPage> {
           child: ListView.builder(
             itemCount: _news.length,
             itemBuilder: (BuildContext context, int index) {
-              return _news[index]._buildNewsItem(context);
+              return _news[index]._buildNewsItem(context, _newsBloc);
             },
           ),
         ),
@@ -52,6 +53,14 @@ class _NewsPageState extends State<NewsPage> {
     } else if (state is NewsLoadedState) {
       closeLoadingDialog(context);
       _news = state.news;
+    } else if (state is NewsSubscribeState) {
+      closeLoadingDialog(context);
+      setState(() {});
+      print('NewsSubscribeState');
+    } else if (state is NewsUnsubscribeState) {
+      closeLoadingDialog(context);
+      setState(() {});
+      print('NewsUnsubscribeState');
     } else if (state is NewsErrorState) {
       closeLoadingDialog(context);
       showDialogMessage(context, 'Error', state.message);
@@ -71,12 +80,12 @@ class _NewsPageState extends State<NewsPage> {
 }
 
 abstract class NewsItem {
-  Widget _buildNewsItem(BuildContext context);
+  Widget _buildNewsItem(BuildContext context, NewsBloc bloc);
 }
 
 class RecommendationItem extends NewsItem {
   @override
-  Widget _buildNewsItem(BuildContext context) {
+  Widget _buildNewsItem(BuildContext context, NewsBloc bloc) {
     return Padding(
       padding: EdgeInsets.all(16.0),
       child: Text(
@@ -95,7 +104,7 @@ class PersonItem extends NewsItem {
   PersonItem(this._person);
 
   @override
-  Widget _buildNewsItem(BuildContext context) {
+  Widget _buildNewsItem(BuildContext context, NewsBloc bloc) {
     return Padding(
       padding: EdgeInsets.all(16.0),
       child: Row(
@@ -109,7 +118,7 @@ class PersonItem extends NewsItem {
           ),
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: EdgeInsets.all(8.0),
               child: Text(
                 trimStringToMaxChart('${_person.firstName} ${_person.lastName}'),
                 maxLines: 1,
@@ -122,11 +131,19 @@ class PersonItem extends NewsItem {
             child: Padding(
               padding: EdgeInsets.all(8.0),
               child: Text(
-                "Subscribe",
+                _person.follower ? "Unsubscribe" : "Subscribe",
                 style: TextStyle(fontSize: 16.0),
               ),
             ),
-            onPressed: () {},
+            onPressed: () {
+              if (_person.follower) {
+                _person.follower = false;
+                bloc.add(FetchNewsUnsubscribeEvent(_person.accountId));
+              } else {
+                _person.follower = true;
+                bloc.add(FetchNewsSubscribeEvent(_person.accountId));
+              }
+            },
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10.0),
             ),

@@ -6,6 +6,7 @@ import 'package:instagram/bloc/post_creation/post_creation_bloc.dart';
 import 'package:instagram/bloc/search/search_bloc.dart';
 import 'package:instagram/data/repositories/people_repository.dart';
 import 'package:instagram/data/repositories/post_repository.dart';
+import 'package:instagram/data/repositories/subscribers_repository.dart';
 import 'package:instagram/ui/pages/home_page.dart';
 import 'package:instagram/ui/pages/news_page.dart';
 import 'package:instagram/ui/pages/post_creation_page.dart';
@@ -61,7 +62,10 @@ class _MainPageState extends State<MainPage> {
               child: NewsPage(),
               create: (BuildContext context) {
                 return NewsBloc(
-                  repository: PeopleRepositoryImpl(
+                  peopleRepository: PeopleRepositoryImpl(
+                    HttpImpl(),
+                  ),
+                  subscribersRepository: SubscribersRepositoryImpl(
                     HttpImpl(),
                   ),
                 );

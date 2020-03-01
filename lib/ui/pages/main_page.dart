@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:instagram/bloc/post_creation/post_creation_bloc.dart';
+import 'package:instagram/data/repositories/post_repository.dart';
 import 'package:instagram/ui/pages/home_page.dart';
 import 'package:instagram/ui/pages/post_creation_page.dart';
 import 'package:instagram/ui/pages/search_page.dart';
+import 'package:instagram/utils/http.dart';
 
 class MainPage extends StatefulWidget {
   @override
@@ -27,7 +31,6 @@ class _MainPageState extends State<MainPage> {
           children: <Widget>[
             HomePage(),
             SearchPage(),
-            PostCreationPage(),
           ],
         ),
       ),
@@ -59,7 +62,16 @@ class _MainPageState extends State<MainPage> {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) {
-        return PostCreationPage();
+        return BlocProvider(
+          child: PostCreationPage(),
+          create: (BuildContext context) {
+            return PostCreationBloc(
+              repository: PostRepositoryImpl(
+                HttpImpl(),
+              ),
+            );
+          },
+        );
       }),
     );
   }

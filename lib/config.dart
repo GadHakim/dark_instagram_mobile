@@ -11,6 +11,7 @@ class Endpoint {
 
   //Post
   static const String POST = 'publication';
+  static const String ADD_POST = '$POST/';
   static const String ALL_POST = '$POST/all';
   static const String SUBSCRIBERS_POSTS = '$POST/subscribers';
 }

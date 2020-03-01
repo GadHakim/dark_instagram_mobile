@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:instagram/bloc/home/home_bloc.dart';
@@ -21,11 +23,13 @@ class _HomePageState extends State<HomePage> {
 
   HomeBloc _homeBloc;
 
+  Completer<Null> _refreshCompleter;
+
   @override
   void initState() {
     super.initState();
     _homeBloc = BlocProvider.of<HomeBloc>(context);
-    _initRequest(context);
+    _initRequest();
   }
 
   @override
@@ -86,13 +90,14 @@ class _HomePageState extends State<HomePage> {
       closeLoadingDialog(context);
       _peopleModel = state.peopleModel;
       _subscribersPostsModel = state.subscribersPostsModel;
+      _onRefreshComplete();
     } else if (state is HomeErrorState) {
       closeLoadingDialog(context);
       showDialogMessage(context, 'Error', state.message);
     }
   }
 
-  _initRequest(BuildContext context) {
+  _initRequest() {
     _homeBloc.add(FetchHomeEvent());
   }
 
@@ -103,14 +108,30 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _buildHomeLoaded() {
-    return Container(
-      child: Column(
-        children: <Widget>[
-          _buildFavoriteContacts(),
-          _buildPosts(),
-        ],
+    return RefreshIndicator(
+      child: Container(
+        child: Column(
+          children: <Widget>[
+            _buildFavoriteContacts(),
+            _buildPosts(),
+          ],
+        ),
       ),
+      onRefresh: () => _onRefresh(),
     );
+  }
+
+  Future<Null> _onRefresh() {
+    _refreshCompleter = Completer<Null>();
+    _homeBloc.add(FetchHomeEvent());
+    return _refreshCompleter.future;
+  }
+
+  _onRefreshComplete() {
+    if (_refreshCompleter != null) {
+      _refreshCompleter.complete();
+      _refreshCompleter = null;
+    }
   }
 
   Widget _buildFavoriteContacts() {
@@ -457,7 +478,7 @@ class _HomePageState extends State<HomePage> {
                 style: TextStyle(fontSize: 16.0),
               ),
             ),
-            onPressed: () => _initRequest(context),
+            onPressed: () => _initRequest(),
             shape: new RoundedRectangleBorder(
               borderRadius: new BorderRadius.circular(30.0),
             ),

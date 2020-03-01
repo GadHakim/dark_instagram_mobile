@@ -90,7 +90,6 @@ class _HomePageState extends State<HomePage> {
       closeLoadingDialog(context);
       showDialogMessage(context, 'Error', state.message);
     }
-    print(state);
   }
 
   _initRequest(BuildContext context) {

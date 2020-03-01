@@ -14,6 +14,21 @@ class SearchPage extends StatefulWidget {
 
 class _SearchPageState extends State<SearchPage> {
   List<SearchItem> _searchList = [];
+  List<_SearchCategoryItem> _categories = [
+    _SearchCategoryItem("IGTV", icon: Icons.tv),
+    _SearchCategoryItem("Shop", icon: Icons.shopping_cart),
+    _SearchCategoryItem("Auto"),
+    _SearchCategoryItem("TV and Films"),
+    _SearchCategoryItem("Travels"),
+    _SearchCategoryItem("Games"),
+    _SearchCategoryItem("Food"),
+    _SearchCategoryItem("Style"),
+    _SearchCategoryItem("Comics"),
+    _SearchCategoryItem("Science and technology"),
+    _SearchCategoryItem("Animals"),
+    _SearchCategoryItem("Music"),
+    _SearchCategoryItem("Decor"),
+  ];
 
   SearchBloc _searchBloc;
 
@@ -37,6 +52,10 @@ class _SearchPageState extends State<SearchPage> {
           ),
           child: Column(
             children: <Widget>[
+              Container(
+                height: 60.0,
+                child: _buildCategories(),
+              ),
               Expanded(
                 child: ListView.builder(
                   itemCount: _searchList.length,
@@ -49,6 +68,53 @@ class _SearchPageState extends State<SearchPage> {
           ),
         ),
       ),
+    );
+  }
+
+  Widget _buildCategories() {
+    return ListView.builder(
+      scrollDirection: Axis.horizontal,
+      itemCount: _categories.length,
+      itemBuilder: (BuildContext context, int index) {
+        _SearchCategoryItem item = _categories[index];
+        return Container(
+          margin: EdgeInsets.all(8.0),
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: Colors.grey,
+              width: 1,
+            ),
+            borderRadius: BorderRadius.all(
+              Radius.circular(5.0),
+            ),
+          ),
+          child: Center(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: <Widget>[
+                  Visibility(
+                    visible: item.icon != null,
+                    child: Icon(
+                        _categories[index].icon
+                    ),
+                  ),
+                  Visibility(
+                    visible: item.icon != null,
+                    child: SizedBox(width: 10),
+                  ),
+                  Text(
+                    item.title,
+                    style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 
@@ -264,4 +330,11 @@ class SearchSmallImagesWithBigRightItem extends SearchItem {
       }
     }
   }
+}
+
+class _SearchCategoryItem {
+  final String title;
+  IconData icon;
+
+  _SearchCategoryItem(this.title, {this.icon});
 }

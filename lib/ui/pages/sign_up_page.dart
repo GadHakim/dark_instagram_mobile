@@ -186,7 +186,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             textInputAction: TextInputAction.done,
                             textAlign: TextAlign.center,
                             focusNode: _focusNodePassword,
-                            onFieldSubmitted: (term) {},
+                            onFieldSubmitted: (term) => _signUpRequest(context),
                             decoration: InputDecoration(
                                 border: UnderlineInputBorder(
                                   borderRadius: BorderRadius.circular(15.0),

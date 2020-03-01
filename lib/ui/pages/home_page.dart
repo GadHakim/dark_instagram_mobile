@@ -328,24 +328,27 @@ class _HomePageState extends State<HomePage> {
                                 left: 8.0,
                                 right: 8.0,
                                 bottom: 8.0,
-                                child: PageViewIndicator(
-                                  length: subscribersPost.content.length,
-                                  normalBuilder: (animationController, index) => Circle(
-                                    size: 8.0,
-                                    color: Colors.grey,
-                                  ),
-                                  highlightedBuilder: (animationController, index) =>
-                                      ScaleTransition(
-                                    scale: CurvedAnimation(
-                                      parent: animationController,
-                                      curve: Curves.ease,
-                                    ),
-                                    child: Circle(
+                                child: Visibility(
+                                  visible: subscribersPost.content.length > 1,
+                                  child: PageViewIndicator(
+                                    length: subscribersPost.content.length,
+                                    normalBuilder: (animationController, index) => Circle(
                                       size: 8.0,
-                                      color: Colors.white,
+                                      color: Colors.grey,
                                     ),
+                                    highlightedBuilder: (animationController, index) =>
+                                        ScaleTransition(
+                                      scale: CurvedAnimation(
+                                        parent: animationController,
+                                        curve: Curves.ease,
+                                      ),
+                                      child: Circle(
+                                        size: 8.0,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                    pageIndexNotifier: valueNotifier,
                                   ),
-                                  pageIndexNotifier: valueNotifier,
                                 ),
                               ),
                               Positioned(

@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:instagram/bloc/home/home_bloc.dart';
 import 'package:instagram/bloc/sign_in/sign_in_bloc.dart';
 import 'package:instagram/bloc/sign_in/sign_in_event.dart';
 import 'package:instagram/bloc/sign_in/sign_in_state.dart';
-import 'package:instagram/data/repositories/people_repository.dart';
-import 'package:instagram/data/repositories/post_repository.dart';
 import 'package:instagram/data/store.dart';
 import 'package:instagram/ui/pages/main_page.dart';
 import 'package:instagram/utils/alerts.dart';
 import 'package:instagram/utils/gradients.dart';
-import 'package:instagram/utils/http.dart';
 import 'package:instagram/utils/keyboard.dart';
 
 class SignInPage extends StatefulWidget {
@@ -182,19 +178,7 @@ class _SignInPageState extends State<SignInPage> {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) {
-        return BlocProvider(
-          child: MainPage(),
-          create: (BuildContext context) {
-            return HomeBloc(
-              peopleRepository: PeopleRepositoryImpl(
-                HttpImpl(),
-              ),
-              postRepository: PostRepositoryImpl(
-                HttpImpl(),
-              ),
-            );
-          },
-        );
+        return MainPage();
       }),
     );
   }

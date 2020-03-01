@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:instagram/bloc/home/home_bloc.dart';
 import 'package:instagram/bloc/post_creation/post_creation_bloc.dart';
+import 'package:instagram/bloc/search/search_bloc.dart';
+import 'package:instagram/data/repositories/people_repository.dart';
 import 'package:instagram/data/repositories/post_repository.dart';
 import 'package:instagram/ui/pages/home_page.dart';
 import 'package:instagram/ui/pages/post_creation_page.dart';
@@ -29,8 +32,29 @@ class _MainPageState extends State<MainPage> {
         child: IndexedStack(
           index: _currentTab,
           children: <Widget>[
-            HomePage(),
-            SearchPage(),
+            BlocProvider(
+              child: HomePage(),
+              create: (BuildContext context) {
+                return HomeBloc(
+                  peopleRepository: PeopleRepositoryImpl(
+                    HttpImpl(),
+                  ),
+                  postRepository: PostRepositoryImpl(
+                    HttpImpl(),
+                  ),
+                );
+              },
+            ),
+            BlocProvider(
+              child: SearchPage(),
+              create: (BuildContext context) {
+                return SearchBloc(
+                  repository: PostRepositoryImpl(
+                    HttpImpl(),
+                  ),
+                );
+              },
+            )
           ],
         ),
       ),

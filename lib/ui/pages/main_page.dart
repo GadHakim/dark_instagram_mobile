@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:instagram/bloc/home/home_bloc.dart';
+import 'package:instagram/bloc/news/news_bloc.dart';
 import 'package:instagram/bloc/post_creation/post_creation_bloc.dart';
 import 'package:instagram/bloc/search/search_bloc.dart';
 import 'package:instagram/data/repositories/people_repository.dart';
 import 'package:instagram/data/repositories/post_repository.dart';
 import 'package:instagram/ui/pages/home_page.dart';
+import 'package:instagram/ui/pages/news_page.dart';
 import 'package:instagram/ui/pages/post_creation_page.dart';
 import 'package:instagram/ui/pages/search_page.dart';
 import 'package:instagram/utils/http.dart';
@@ -54,7 +56,17 @@ class _MainPageState extends State<MainPage> {
                   ),
                 );
               },
-            )
+            ),
+            BlocProvider(
+              child: NewsPage(),
+              create: (BuildContext context) {
+                return NewsBloc(
+                  repository: PeopleRepositoryImpl(
+                    HttpImpl(),
+                  ),
+                );
+              },
+            ),
           ],
         ),
       ),

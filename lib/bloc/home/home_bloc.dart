@@ -25,7 +25,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     if (event is FetchHomeEvent) {
       yield HomeLoadingState();
       try {
-        PeopleModel peopleModel = await peopleRepository.getPeople();
+        PeopleModel peopleModel = await peopleRepository.getSubscribers();
         SubscribersPostsModel subscribersPostsModel = await postRepository.getSubscribersPosts();
         yield HomeLoadedState(
           peopleModel: peopleModel,

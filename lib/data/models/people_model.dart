@@ -30,13 +30,15 @@ class Person {
   String firstName;
   String lastName;
   String avatarImagePath;
+  bool follower;
 
   Person(
       {this.accountId,
         this.userEmail,
         this.firstName,
         this.lastName,
-        this.avatarImagePath});
+        this.avatarImagePath,
+        this.follower});
 
   Person.fromJson(Map<String, dynamic> json) {
     accountId = json['account_id'];
@@ -44,6 +46,7 @@ class Person {
     firstName = json['first_name'];
     lastName = json['last_name'];
     avatarImagePath = json['avatar_image_path'];
+    follower = json['follower'];
   }
 
   Map<String, dynamic> toJson() {
@@ -53,6 +56,7 @@ class Person {
     data['first_name'] = this.firstName;
     data['last_name'] = this.lastName;
     data['avatar_image_path'] = this.avatarImagePath;
+    data['follower'] = this.follower;
     return data;
   }
 }

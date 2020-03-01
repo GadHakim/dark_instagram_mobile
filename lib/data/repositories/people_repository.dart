@@ -7,6 +7,10 @@ abstract class PeopleRepository {
   Future<PeopleModel> getPeople({
     int limit,
   });
+
+  Future<PeopleModel> getSubscribers({
+    int limit,
+  });
 }
 
 class PeopleRepositoryImpl extends PeopleRepository {
@@ -16,6 +20,19 @@ class PeopleRepositoryImpl extends PeopleRepository {
 
   @override
   Future<PeopleModel> getPeople({
+    int limit = 10,
+  }) async {
+    Response response = await http.get(Endpoint.PEOPLE, {
+      'limit': limit.toString(),
+    });
+
+    return Http.readResponse(response, (data) {
+      return PeopleModel.fromJson(data);
+    });
+  }
+
+  @override
+  Future<PeopleModel> getSubscribers({
     int limit = 10,
   }) async {
     Response response = await http.get(Endpoint.GET_SUBSCRIBERS, {

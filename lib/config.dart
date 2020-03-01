@@ -8,6 +8,7 @@ class Endpoint {
 
   //People
   static const String PEOPLE = 'people/';
+  static const String GET_SUBSCRIBERS = 'people/subscribers';
 
   //Post
   static const String POST = 'publication';

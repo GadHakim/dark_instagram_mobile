@@ -18,7 +18,7 @@ class PeopleRepositoryImpl extends PeopleRepository {
   Future<PeopleModel> getPeople({
     int limit = 10,
   }) async {
-    Response response = await http.get(Endpoint.PEOPLE, {
+    Response response = await http.get(Endpoint.GET_SUBSCRIBERS, {
       'limit': limit.toString(),
     });
 

@@ -32,7 +32,7 @@ class PostRepositoryImpl extends PostRepository {
 
   @override
   Future<AllPostModel> getAllPost({
-    int limit = 10,
+    int limit = 100,
   }) async {
     Response response = await http.get(Endpoint.ALL_POST, {
       'limit': limit.toString(),
@@ -61,8 +61,6 @@ class PostRepositoryImpl extends PostRepository {
     String comment,
     List<File> file,
   }) async {
-    print(file);
-
     var uri = Uri.http(Endpoint.BASE_URL, Endpoint.ADD_POST);
     var request = new MultipartRequest("POST", uri);
     request.headers['Authorization'] = "Bearer ${store.accessToken}";

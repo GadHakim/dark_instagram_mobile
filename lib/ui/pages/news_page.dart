@@ -27,7 +27,6 @@ class _NewsPageState extends State<NewsPage> {
 
   @override
   Widget build(BuildContext context) {
-//    _initRequest();
     return Scaffold(
       appBar: _buildAppBar(),
       body: Container(
@@ -56,11 +55,9 @@ class _NewsPageState extends State<NewsPage> {
     } else if (state is NewsSubscribeState) {
       closeLoadingDialog(context);
       setState(() {});
-      print('NewsSubscribeState');
     } else if (state is NewsUnsubscribeState) {
       closeLoadingDialog(context);
       setState(() {});
-      print('NewsUnsubscribeState');
     } else if (state is NewsErrorState) {
       closeLoadingDialog(context);
       showDialogMessage(context, 'Error', state.message);

@@ -146,7 +146,6 @@ class _SearchPageState extends State<SearchPage> {
     } else if (state is SearchLoadedState) {
       closeLoadingDialog(context);
       _searchList = state.searchList;
-      print(_searchList);
     } else if (state is SearchErrorState) {
       closeLoadingDialog(context);
       showDialogMessage(context, 'Error', state.message);

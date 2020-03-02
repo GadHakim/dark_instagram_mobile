@@ -210,7 +210,6 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 
   _blocListener(BuildContext context, SignUpState state) {
-    print(state);
     if (state is SignUpLoadingState) {
       showLoadingDialog(context);
     } else if (state is SignUpLoadedState) {

@@ -1,7 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:instagram/ui/widgets/gradients.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:instagram/bloc/sign_in/sign_in_bloc.dart';
+import 'package:instagram/bloc/sign_in/sign_in_event.dart';
+import 'package:instagram/bloc/sign_in/sign_in_state.dart';
+import 'package:instagram/data/store.dart';
+import 'package:instagram/ui/pages/main_page.dart';
+import 'package:instagram/utils/alerts.dart';
+import 'package:instagram/utils/gradients.dart';
+import 'package:instagram/utils/keyboard.dart';
 
 class SignInPage extends StatefulWidget {
+  SignInPage();
+
   @override
   _SignInPageState createState() => _SignInPageState();
 }
@@ -10,61 +20,102 @@ class _SignInPageState extends State<SignInPage> {
   final FocusNode _focusNodeEmail = FocusNode();
   final FocusNode _focusNodePassword = FocusNode();
 
+  String _email = '';
+  String _password = '';
+
+  SignInBloc _signInBloc;
+
+  Store _store;
+
+  @override
+  void initState() {
+    super.initState();
+    _signInBloc = BlocProvider.of<SignInBloc>(context);
+    _store = Store();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomPadding: false,
-      body: SafeArea(
-        child: Container(
-          decoration: BoxDecoration(
-            gradient: darkBackgroundGradient(),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              children: <Widget>[
-                Container(
-                  height: 32.0,
-                  child: Row(
-                    children: <Widget>[
-                      BackButton(),
-                    ],
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(
+          color: Theme.of(context).primaryColor,
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Padding(
+              padding: EdgeInsets.only(bottom: 32.0),
+              child: RaisedButton(
+                color: Theme.of(context).accentColor,
+                child: Padding(
+                  padding: EdgeInsets.all(16.0),
+                  child: Text(
+                    "Sign In",
+                    style: TextStyle(fontSize: 18.0),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 32.0),
-                  child: Center(
-                    child: Text(
-                      'Dark Instagram',
-                      style: TextStyle(
-                        fontFamily: 'Billabong',
-                        fontSize: 48.0,
+                onPressed: () => _signInRequest(context),
+                shape: new RoundedRectangleBorder(
+                  borderRadius: new BorderRadius.circular(30.0),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+      body: BlocListener<SignInBloc, SignInState>(
+        listener: (context, state) => _blocListener(context, state),
+        child: SafeArea(
+          child: Container(
+            height: MediaQuery.of(context).size.height,
+            decoration: BoxDecoration(
+              gradient: darkBackgroundGradient(),
+            ),
+            child: SingleChildScrollView(
+              child: Column(
+                children: <Widget>[
+                  Container(
+                    child: Row(
+                      children: <Widget>[
+                        BackButton(),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 32.0),
+                    child: Center(
+                      child: Text(
+                        'Instagram',
+                        style: TextStyle(
+                          fontFamily: 'Billabong',
+                          fontSize: 48.0,
+                        ),
                       ),
                     ),
                   ),
-                ),
-                Expanded(
-                  child: Form(
+                  Form(
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
                         Container(
                           width: MediaQuery.of(context).size.width * 0.5,
                           child: TextFormField(
+                            onChanged: (email) {
+                              _email = email;
+                            },
                             textInputAction: TextInputAction.next,
                             textAlign: TextAlign.center,
                             focusNode: _focusNodeEmail,
                             onFieldSubmitted: (term) {
                               _focusNodeEmail.unfocus();
-                              FocusScope.of(context)
-                                  .requestFocus(_focusNodePassword);
+                              FocusScope.of(context).requestFocus(_focusNodePassword);
                             },
                             decoration: InputDecoration(
-                                border: OutlineInputBorder(
+                                border: UnderlineInputBorder(
                                   borderRadius: BorderRadius.circular(15.0),
-                                  borderSide:
-                                      BorderSide(color: Colors.blueAccent),
+                                  borderSide: BorderSide(color: Colors.blueAccent),
                                 ),
                                 hintText: 'Email'),
                           ),
@@ -75,54 +126,61 @@ class _SignInPageState extends State<SignInPage> {
                         Container(
                           width: MediaQuery.of(context).size.width * 0.5,
                           child: TextFormField(
-                            validator: (String arg) {
-                              if (arg.length < 3)
-                                return 'Name must be more than 2 charater';
-                              else
-                                return null;
+                            onChanged: (password) {
+                              _password = password;
                             },
                             textInputAction: TextInputAction.done,
                             textAlign: TextAlign.center,
                             focusNode: _focusNodePassword,
-                            onFieldSubmitted: (term) {},
+                            onFieldSubmitted: (term) => _signInRequest(context),
                             decoration: InputDecoration(
-                                border: OutlineInputBorder(
+                                border: UnderlineInputBorder(
                                   borderRadius: BorderRadius.circular(15.0),
-                                  borderSide:
-                                      BorderSide(color: Colors.blueAccent),
+                                  borderSide: BorderSide(color: Colors.blueAccent),
                                 ),
                                 hintText: 'Password'),
                           ),
                         ),
-                        SizedBox(
-                          height: 32.0,
-                        ),
-                        RaisedButton(
-                          color: Theme.of(context).accentColor,
-                          child: Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: Text(
-                              "Sign In",
-                              style: TextStyle(fontSize: 18.0),
-                            ),
-                          ),
-                          onPressed: () {},
-                          shape: new RoundedRectangleBorder(
-                            borderRadius: new BorderRadius.circular(30.0),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 64.0,
-                        ),
                       ],
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
       ),
+    );
+  }
+
+  _blocListener(BuildContext context, SignInState state) {
+    if (state is SignInLoadingState) {
+      showLoadingDialog(context);
+    } else if (state is SignInLoadedState) {
+      closeLoadingDialog(context);
+      _store.token = state.signInModel;
+      _navigateToHomePage(context);
+    } else if (state is SignInErrorState) {
+      closeLoadingDialog(context);
+      showDialogMessage(context, 'Error', state.message);
+    }
+  }
+
+  _signInRequest(BuildContext context) {
+    closeKeyboard(context);
+    _signInBloc.add(FetchSignInEvent(
+      _email.trim(),
+      _password.trim(),
+    ));
+  }
+
+  void _navigateToHomePage(BuildContext context) {
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(builder: (context) {
+        return MainPage();
+      }),
+      (Route<dynamic> r) => false,
     );
   }
 }

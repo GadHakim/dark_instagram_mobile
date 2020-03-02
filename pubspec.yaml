@@ -9,6 +9,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  http: ^0.12.0
+  flutter_bloc: ^2.0.0
+  equatable: ^0.6.1
+  page_view_indicator: ^2.0.4
+  image_picker: ^0.6.3+4
 
   cupertino_icons: ^0.1.2
 
@@ -24,3 +29,6 @@ flutter:
     - family: Billabong
       fonts:
         - asset: assets/fonts/Billabong.ttf
+
+  assets:
+    - assets/images/

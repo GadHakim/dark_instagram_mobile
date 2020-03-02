@@ -6,6 +6,9 @@ class Endpoint {
   static const String LOGIN = '$AUTH/login';
   static const String REGISTRATION = '$AUTH/registration';
 
+  //Profile
+  static const String PROFILE = 'profile/';
+
   //People
   static const String PEOPLE = 'people/';
   static const String GET_SUBSCRIBERS = 'people/subscribers';

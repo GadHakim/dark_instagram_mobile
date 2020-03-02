@@ -175,11 +175,12 @@ class _SignInPageState extends State<SignInPage> {
   }
 
   void _navigateToHomePage(BuildContext context) {
-    Navigator.push(
+    Navigator.pushAndRemoveUntil(
       context,
       MaterialPageRoute(builder: (context) {
         return MainPage();
       }),
+      (Route<dynamic> r) => false,
     );
   }
 }

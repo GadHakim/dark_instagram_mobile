@@ -25,6 +25,7 @@ class Result {
   String firstName;
   String lastName;
   String avatarImagePath;
+  String fullName;
 
   Result({this.userEmail, this.firstName, this.lastName, this.avatarImagePath});
 
@@ -33,6 +34,7 @@ class Result {
     firstName = json['first_name'];
     lastName = json['last_name'];
     avatarImagePath = json['avatar_image_path'];
+    fullName = json['full_name'];
   }
 
   Map<String, dynamic> toJson() {
@@ -41,6 +43,7 @@ class Result {
     data['first_name'] = this.firstName;
     data['last_name'] = this.lastName;
     data['avatar_image_path'] = this.avatarImagePath;
+    data['full_name'] = this.fullName;
     return data;
   }
 }

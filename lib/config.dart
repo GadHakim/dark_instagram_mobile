@@ -1,5 +1,6 @@
 class Endpoint {
-  static const String BASE_URL = '192.168.0.100:3000';
+//  static const String BASE_URL = '192.168.0.100:3000'; //local
+  static const String BASE_URL = '18.195.62.146:3200'; //server
 
   //Auth
   static const String AUTH = 'auth/';

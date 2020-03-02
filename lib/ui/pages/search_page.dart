@@ -41,7 +41,6 @@ class _SearchPageState extends State<SearchPage> {
 
   @override
   Widget build(BuildContext context) {
-    _initRequest();
     return Scaffold(
       appBar: _buildAppBar(),
       body: BlocListener<SearchBloc, SearchState>(

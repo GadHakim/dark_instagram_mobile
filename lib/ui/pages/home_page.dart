@@ -2,15 +2,20 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:instagram/bloc/direct/direct_bloc.dart';
 import 'package:instagram/bloc/home/home_bloc.dart';
 import 'package:instagram/bloc/home/home_event.dart';
 import 'package:instagram/bloc/home/home_state.dart';
 import 'package:instagram/data/models/people_model.dart';
 import 'package:instagram/data/models/subscribers_posts_model.dart';
+import 'package:instagram/data/repositories/direct_repository.dart';
 import 'package:instagram/utils/alerts.dart';
 import 'package:instagram/utils/gradients.dart';
+import 'package:instagram/utils/http.dart';
 import 'package:instagram/utils/text.dart';
 import 'package:page_view_indicator/page_view_indicator.dart';
+
+import 'direct_page.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -77,7 +82,7 @@ class _HomePageState extends State<HomePage> {
       actions: <Widget>[
         IconButton(
           icon: Icon(Icons.send),
-          onPressed: () {},
+          onPressed: () => _navigateToDirectPage(),
         ),
       ],
     );
@@ -494,6 +499,24 @@ class _HomePageState extends State<HomePage> {
   Widget _buildHomeUnknownError() {
     return Center(
       child: Text('BlocBuilder Error'),
+    );
+  }
+
+  void _navigateToDirectPage() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) {
+        return BlocProvider(
+          child: DirectPage(),
+          create: (BuildContext context) {
+            return DirectBloc(
+              repository: DirectRepositoryImpl(
+                HttpImpl(),
+              ),
+            );
+          },
+        );
+      }),
     );
   }
 }

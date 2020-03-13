@@ -24,4 +24,8 @@ class Endpoint {
   static const String SUBSCRIBERS = 'subscribers/';
   static const String SUBSCRIBE = '$SUBSCRIBERS/subscribe';
   static const String UNSUBSCRIBE = '$SUBSCRIBERS/unsubscribe';
+
+  //Direct
+  static const String DIRECT = 'chat/';
+  static const String ALL_DIRECT = '$DIRECT/all';
 }
